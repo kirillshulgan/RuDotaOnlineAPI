@@ -5,6 +5,7 @@ using RuDotaOnlineAPI.Storage.Identity.Abstraction;
 using RuDotaOnlineAPI.Storage.Identity.Abstraction.Aggregators;
 using RuDotaOnlineAPI.Storage.Identity.Abstraction.Repositories;
 using RuDotaOnlineAPI.Storage.Identity.Aggregators;
+using RuDotaOnlineAPI.Storage.Identity.Infrastructure;
 using RuDotaOnlineAPI.Storage.Identity.Repositories;
 
 namespace RuDotaOnlineAPI.Storage.Identity.Extensions;
@@ -48,6 +49,9 @@ public static class StorageIdentityServiceCollectionExtensions
 
         // Агрегаторы
         services.AddScoped<IApplicationUserAggregator, ApplicationUserAggregator>();
+
+        // Сидеры данных
+        services.AddScoped<IdentitySeeder>();
 
         return services;
     }

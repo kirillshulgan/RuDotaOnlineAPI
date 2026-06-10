@@ -1,13 +1,18 @@
 {
   "Version": 3,
-  "ListAllProjects": true,
+  "ListAllProjects": false,
   "MultiProjectConfigurations": {
+    "Aspire": {
+      "Projects": {
+        "RuDotaOnlineAPI.AppHost": {}
+      }
+    },
     "Gateway": {
       "Projects": {
-        "BudgetExecution.Admin": {
+        "RuDotaOnlineAPI.Gateway": {
           "ProfileName": "Development"
         },
-        "BudgetExecution.Service.Identity": {
+        "RuDotaOnlineAPI.Service.Identity": {
           "ProfileName": "Development"
         }
       }

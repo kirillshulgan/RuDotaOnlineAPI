@@ -19,14 +19,23 @@ public sealed class JwtService : IJwtService
 
     public JwtService(IConfiguration configuration)
     {
-        _issuer = configuration["Jwt:Issuer"] ?? throw new InvalidOperationException("Jwt:Issuer missing.");
-        _audience = configuration["Jwt:Audience"] ?? throw new InvalidOperationException("Jwt:Audience missing.");
+        _issuer = configuration["Jwt:Issuer"] ?? "dev-issuer";
+        _audience = configuration["Jwt:Audience"] ?? "dev-audience";
         _ttlMinutes = int.Parse(configuration["Jwt:AccessTokenTtlMinutes"] ?? "15");
 
-        var privatePem = configuration["Jwt:PrivateKeyPem"]
-            ?? throw new InvalidOperationException("Jwt:PrivateKeyPem missing.");
-        var publicPem = configuration["Jwt:PublicKeyPem"]
-            ?? throw new InvalidOperationException("Jwt:PublicKeyPem missing.");
+        var privatePem = configuration["Jwt:PrivateKeyPem"];
+        var publicPem = configuration["Jwt:PublicKeyPem"];
+
+        if (!IsValidPem(privatePem) || !IsValidPem(publicPem))
+        {
+            var rsa = RSA.Create(2048);
+            _privateKey = new RsaSecurityKey(rsa) { KeyId = "dev-key" };
+            _publicKey = new RsaSecurityKey(rsa) { KeyId = "dev-key" };
+            return;
+        }
+
+        privatePem = NormalizePem(privatePem!);
+        publicPem = NormalizePem(publicPem!);
 
         var privateRsa = RSA.Create();
         privateRsa.ImportFromPem(privatePem);
@@ -111,4 +120,8 @@ public sealed class JwtService : IJwtService
         };
         return JsonSerializer.Serialize(jwk);
     }
+
+    private static string NormalizePem(string pem) => pem.Replace("\\n", "\n").Replace("\\r\\n", "\n").Trim();
+
+    private static bool IsValidPem(string? pem) => !string.IsNullOrWhiteSpace(pem) && pem.Contains("-----BEGIN ") && pem.Contains("-----END ");
 }

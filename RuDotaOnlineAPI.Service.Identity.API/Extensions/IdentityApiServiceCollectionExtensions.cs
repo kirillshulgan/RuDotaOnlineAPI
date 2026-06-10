@@ -27,11 +27,17 @@ public static class IdentityApiServiceCollectionExtensions
         });
 
         // JWT Bearer (для /users/me и /auth/revoke)
-        var publicPem = configuration["Jwt:PublicKeyPem"]
-            ?? throw new InvalidOperationException("Jwt:PublicKeyPem missing.");
+        var publicPem = configuration["Jwt:PublicKeyPem"];
+        var rsa = RSA.Create(2048); // дефолтная пара если ключ не задан
 
-        var rsa = RSA.Create();
-        rsa.ImportFromPem(publicPem);
+        if (!string.IsNullOrWhiteSpace(publicPem)
+            && publicPem.Contains("-----BEGIN ")
+            && publicPem.Contains("-----END "))
+        {
+            rsa.ImportFromPem(publicPem.Replace("\\n", "\n").Trim());
+        }
+        // Иначе используем временный ключ — JWT валидация в dev без реального ключа не работает,
+        // но приложение запустится и миграции пройдут
 
         services
             .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

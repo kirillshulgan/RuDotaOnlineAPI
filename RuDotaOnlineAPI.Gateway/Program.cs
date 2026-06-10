@@ -27,6 +27,7 @@ try
     var configuration = builder.Configuration;
 
     // ── OpenTelemetry ─────────────────────────────────────────
+    //builder.AddServiceDefaults();
     builder.Services.AddObservability(configuration);
 
     // ── YARP ──────────────────────────────────────────────────

@@ -12,9 +12,14 @@
     <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="9.0.0" />
     <PackageReference Include="MassTransit.EntityFrameworkCore" Version="9.1.2" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="9.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.16.0" />
     <PackageReference Include="OpenTelemetry.Exporter.Prometheus.AspNetCore" Version="1.15.3-beta.1" />
-    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.15.3" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.16.0" />
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.15.2" />
     <PackageReference Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.15.1-beta.1" />
     <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.15.1" />
@@ -27,6 +32,7 @@
   <ItemGroup>
     <ProjectReference Include="..\RuDotaOnlineAPI.Service.Identity.API\RuDotaOnlineAPI.Service.Identity.API.csproj" />
     <ProjectReference Include="..\RuDotaOnlineAPI.Service.Identity.Domain\RuDotaOnlineAPI.Service.Identity.Domain.csproj" />
+    <ProjectReference Include="..\RuDotaOnlineAPI.ServiceDefaults\RuDotaOnlineAPI.ServiceDefaults.csproj" />
     <ProjectReference Include="..\RuDotaOnlineAPI.Shared.Observability\RuDotaOnlineAPI.Shared.Observability.csproj" />
     <ProjectReference Include="..\RuDotaOnlineAPI.Storage.Identity\RuDotaOnlineAPI.Storage.Identity.csproj" />
   </ItemGroup>

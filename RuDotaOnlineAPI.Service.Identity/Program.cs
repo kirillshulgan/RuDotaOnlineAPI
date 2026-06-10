@@ -1,12 +1,12 @@
 using MassTransit;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
-using RabbitMQ.Client;
 using RuDotaOnlineAPI.Service.Identity.API.Extensions;
 using RuDotaOnlineAPI.Service.Identity.Domain;
 using RuDotaOnlineAPI.Shared.Observability;
 using RuDotaOnlineAPI.Storage.Identity;
 using RuDotaOnlineAPI.Storage.Identity.Extensions;
+using RuDotaOnlineAPI.Storage.Identity.Infrastructure;
 using Serilog;
 using System.Text.Json;
 
@@ -21,6 +21,21 @@ builder.Host.UseSerilog((ctx, cfg) =>
            "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}"));
 
 // ── Storage ───────────────────────────────────────────────────────────────────
+var aspireConnStr = builder.Configuration.GetConnectionString("myapp-identity");
+if (aspireConnStr is not null)
+{
+    builder.Configuration["ConnectionStrings:Leader"] = aspireConnStr;
+    builder.Configuration["ConnectionStrings:SyncRead"] = aspireConnStr;
+    builder.Configuration["ConnectionStrings:AsyncRead"] = aspireConnStr;
+}
+
+builder.Services.AddIdentityStorage(builder.Configuration);
+
+// ── Redis ───────────────────────────────────────────────────────────────────
+var aspireRedis = builder.Configuration.GetConnectionString("redis");
+if (aspireRedis is not null)
+    builder.Configuration["ConnectionStrings:Redis"] = aspireRedis;
+
 builder.Services.AddIdentityStorage(builder.Configuration);
 
 // ── Domain ────────────────────────────────────────────────────────────────────
@@ -30,6 +45,7 @@ builder.Services.AddIdentityDomain(builder.Configuration);
 builder.Services.AddIdentityApi(builder.Configuration);
 
 // ── Observability ─────────────────────────────────────────────────────────────
+//builder.AddServiceDefaults();
 builder.Services.AddObservability(builder.Configuration);
 
 // ── MassTransit + Outbox ──────────────────────────────────────────────────────
@@ -72,19 +88,19 @@ builder.Services
         tags: ["ready"])
     .AddRedis(
         builder.Configuration["ConnectionStrings:Redis"]!,
-        tags: ["ready"])
-    .AddRabbitMQ(
-        factory: sp => sp.GetRequiredService<IConnection>(),
         tags: ["ready"]);
 
 // ─────────────────────────────────────────────────────────────────────────────
 var app = builder.Build();
 
-// ── Auto-migrate ──────────────────────────────────────────────────────────────
+// ── Auto-migrate + Seed ───────────────────────────────────────────────────────
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<IdentityUnitOfWork>();
     await db.Database.MigrateAsync();
+
+    var seeder = scope.ServiceProvider.GetRequiredService<IdentitySeeder>();
+    await seeder.SeedAsync();
 }
 
 // ── Middleware ────────────────────────────────────────────────────────────────

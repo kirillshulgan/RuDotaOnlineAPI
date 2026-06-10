@@ -1,4 +1,19 @@
 <Solution>
+  <Folder Name="/.solution/">
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="README.md" />
+    <File Path="RuDotaOnlineAPI.slnx.startup.json" />
+  </Folder>
+  <Folder Name="/.solution/.scripts/" />
+  <Folder Name="/.solution/.scripts/Docker/">
+    <File Path=".env" />
+    <File Path="docker-compose.yml" />
+    <File Path="postgres-init.sh" />
+  </Folder>
+  <Folder Name="/.solution/.scripts/Docker/Prometheus/">
+    <File Path="prometheus.yml" />
+  </Folder>
   <Folder Name="/Service/" />
   <Folder Name="/Service/Identity/">
     <Project Path="RuDotaOnlineAPI.Service.Identity.API/RuDotaOnlineAPI.Service.Identity.API.csproj" Id="586f9ed1-c524-436e-b7f3-352db4d5949d" />
@@ -17,5 +32,7 @@
     <Project Path="RuDotaOnlineAPI.Storage.Identity.Abstraction/RuDotaOnlineAPI.Storage.Identity.Abstraction.csproj" />
     <Project Path="RuDotaOnlineAPI.Storage.Identity/RuDotaOnlineAPI.Storage.Identity.csproj" />
   </Folder>
+  <Project Path="RuDotaOnlineAPI.AppHost/RuDotaOnlineAPI.AppHost.csproj" Id="b7071144-8077-47b2-97c5-83473d3627e0" />
   <Project Path="RuDotaOnlineAPI.Gateway/RuDotaOnlineAPI.Gateway.csproj" />
+  <Project Path="RuDotaOnlineAPI.ServiceDefaults/RuDotaOnlineAPI.ServiceDefaults.csproj" Id="9af67ccb-2985-408c-b560-abfa88dd066f" />
 </Solution>
