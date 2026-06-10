@@ -1,0 +1,16 @@
+{
+  "Version": 3,
+  "ListAllProjects": true,
+  "MultiProjectConfigurations": {
+    "Gateway": {
+      "Projects": {
+        "BudgetExecution.Admin": {
+          "ProfileName": "Development"
+        },
+        "BudgetExecution.Service.Identity": {
+          "ProfileName": "Development"
+        }
+      }
+    }
+  }
+}

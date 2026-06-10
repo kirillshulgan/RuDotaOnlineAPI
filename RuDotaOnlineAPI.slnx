@@ -1,0 +1,21 @@
+<Solution>
+  <Folder Name="/Service/" />
+  <Folder Name="/Service/Identity/">
+    <Project Path="RuDotaOnlineAPI.Service.Identity.API/RuDotaOnlineAPI.Service.Identity.API.csproj" Id="586f9ed1-c524-436e-b7f3-352db4d5949d" />
+    <Project Path="RuDotaOnlineAPI.Service.Identity.Domain.Abstraction/RuDotaOnlineAPI.Service.Identity.Domain.Abstraction.csproj" Id="f9a5996f-01e2-466a-88c9-7487e8de9a9d" />
+    <Project Path="RuDotaOnlineAPI.Service.Identity.Domain/RuDotaOnlineAPI.Service.Identity.Domain.csproj" Id="0ffe0256-3466-49d8-a912-58a691e45b61" />
+    <Project Path="RuDotaOnlineAPI.Service.Identity/RuDotaOnlineAPI.Service.Identity.csproj" Id="0a709ca5-b870-4e6e-a8eb-99b509e2853e" />
+  </Folder>
+  <Folder Name="/Shared/">
+    <Project Path="RuDotaOnlineAPI.Shared.Observability/RuDotaOnlineAPI.Shared.Observability.csproj" />
+  </Folder>
+  <Folder Name="/Storage/">
+    <Project Path="RuDotaOnlineAPI.Storage.SDK.Abstraction/RuDotaOnlineAPI.Storage.SDK.Abstraction.csproj" />
+    <Project Path="RuDotaOnlineAPI.Storage.SDK/RuDotaOnlineAPI.Storage.SDK.csproj" />
+  </Folder>
+  <Folder Name="/Storage/Identity/">
+    <Project Path="RuDotaOnlineAPI.Storage.Identity.Abstraction/RuDotaOnlineAPI.Storage.Identity.Abstraction.csproj" />
+    <Project Path="RuDotaOnlineAPI.Storage.Identity/RuDotaOnlineAPI.Storage.Identity.csproj" />
+  </Folder>
+  <Project Path="RuDotaOnlineAPI.Gateway/RuDotaOnlineAPI.Gateway.csproj" />
+</Solution>
