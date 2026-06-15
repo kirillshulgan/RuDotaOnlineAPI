@@ -32,7 +32,6 @@
     <Project Path="RuDotaOnlineAPI.Storage.Identity.Abstraction/RuDotaOnlineAPI.Storage.Identity.Abstraction.csproj" />
     <Project Path="RuDotaOnlineAPI.Storage.Identity/RuDotaOnlineAPI.Storage.Identity.csproj" />
   </Folder>
-  <Project Path="RuDotaOnlineAPI.AppHost/RuDotaOnlineAPI.AppHost.csproj" Id="b7071144-8077-47b2-97c5-83473d3627e0" />
   <Project Path="RuDotaOnlineAPI.Gateway/RuDotaOnlineAPI.Gateway.csproj" />
   <Project Path="RuDotaOnlineAPI.ServiceDefaults/RuDotaOnlineAPI.ServiceDefaults.csproj" Id="9af67ccb-2985-408c-b560-abfa88dd066f" />
 </Solution>

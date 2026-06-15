@@ -21,21 +21,9 @@ builder.Host.UseSerilog((ctx, cfg) =>
            "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}"));
 
 // ── Storage ───────────────────────────────────────────────────────────────────
-var aspireConnStr = builder.Configuration.GetConnectionString("myapp-identity");
-if (aspireConnStr is not null)
-{
-    builder.Configuration["ConnectionStrings:Leader"] = aspireConnStr;
-    builder.Configuration["ConnectionStrings:SyncRead"] = aspireConnStr;
-    builder.Configuration["ConnectionStrings:AsyncRead"] = aspireConnStr;
-}
-
 builder.Services.AddIdentityStorage(builder.Configuration);
 
 // ── Redis ───────────────────────────────────────────────────────────────────
-var aspireRedis = builder.Configuration.GetConnectionString("redis");
-if (aspireRedis is not null)
-    builder.Configuration["ConnectionStrings:Redis"] = aspireRedis;
-
 builder.Services.AddIdentityStorage(builder.Configuration);
 
 // ── Domain ────────────────────────────────────────────────────────────────────

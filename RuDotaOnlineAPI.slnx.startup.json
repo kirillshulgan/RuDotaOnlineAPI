@@ -2,11 +2,6 @@
   "Version": 3,
   "ListAllProjects": false,
   "MultiProjectConfigurations": {
-    "Aspire": {
-      "Projects": {
-        "RuDotaOnlineAPI.AppHost": {}
-      }
-    },
     "Gateway": {
       "Projects": {
         "RuDotaOnlineAPI.Gateway": {
