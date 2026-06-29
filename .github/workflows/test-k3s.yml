@@ -1,0 +1,15 @@
+name: Test K3s ARC Runner
+
+on:
+  workflow_dispatch: # Позволяет запускать Action вручную из интерфейса GitHub
+
+jobs:
+  test-k3s-job:
+    runs-on: arc-runner-set
+    steps:
+      - name: Check OS
+        run: cat /etc/os-release
+      - name: Check .NET SDKs (if installed)
+        run: dotnet --list-sdks || echo ".NET is not installed in this runner image"
+      - name: Check Docker
+        run: docker ps || echo "Docker is not available"

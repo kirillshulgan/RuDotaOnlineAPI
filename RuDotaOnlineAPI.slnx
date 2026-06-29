@@ -5,6 +5,10 @@
     <File Path="README.md" />
     <File Path="RuDotaOnlineAPI.slnx.startup.json" />
   </Folder>
+  <Folder Name="/.solution/.github/" />
+  <Folder Name="/.solution/.github/workflows/">
+    <File Path=".github/workflows/test-k3s.yml" />
+  </Folder>
   <Folder Name="/.solution/.scripts/" />
   <Folder Name="/.solution/.scripts/Docker/">
     <File Path=".env" />
